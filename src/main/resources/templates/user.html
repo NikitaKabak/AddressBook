@@ -8,7 +8,7 @@
 <body>
 
 
-<table>
+<table id="userTable">
     <tr>
         <td>Name</td>
         <td>FirstName LastName </td>
@@ -34,15 +34,15 @@
             </td>
             <td>
                 <div th:each="telephonnumberList : ${User.getTelephonnumberList()}">
-                    <span th:text="${telephonnumberList.getTelephonnumber()}"></span><br><br>
+                    <span th:text="${telephonnumberList.getTelephonnumber()}"></span><br>
                 </div>
             </td>
         </tr>
 </table>
 
 <div>
-        <form>
-            <button formmethod="get" formaction="/" name="back">back</button>
+        <form id="back">
+            <button formmethod="get" formaction="/index" name="back">back</button>
         </form>
 
 </div>

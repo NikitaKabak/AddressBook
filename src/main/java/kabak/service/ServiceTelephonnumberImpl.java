@@ -6,6 +6,8 @@ import kabak.repository.TelephonnumberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServiceTelephonnumberImpl implements ServiceTelephonnumber {
 
@@ -20,4 +22,14 @@ public class ServiceTelephonnumberImpl implements ServiceTelephonnumber {
         telephonnumberEntity.setTelephonnumber(telephonnumber);
         return telephonnumberEntity;
     }
+
+    public void deleteByUser (Users user) throws Exception {
+        telephonnumberRepository.deleteInBatch(findByUser(user));
+    }
+
+    public List<Telephonnumber> findByUser(Users user) throws Exception {
+        List<Telephonnumber> telephonnumberList = telephonnumberRepository.findByUser(user);
+        return telephonnumberList;
+    }
+
 }

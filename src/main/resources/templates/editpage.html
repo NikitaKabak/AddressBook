@@ -4,11 +4,17 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <title>Security with Spring Boot</title>
+    <script
+            src="https://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous">
+    </script>
+
+
 </head>
 <body>
 <div>
-
-    <form method="post" action="/edit">
+    <form method="post" action="/edit" id="editUserForm">
 
         <input name="iduser" th:value="${User.getIduser()}" type="hidden">
         Name <input name ="name" th:value="${User.getName()}">  <br><br>
@@ -17,24 +23,80 @@
         firstname <input name ="firstname" th:value="${User.getFirstname()}">  <br><br>
         lastname <input name ="lastname" th:value="${User.getLastname()}">  <br><br>
         position <input name ="position" th:value="${User.getPosition()}">  <br><br>
+
         <div th:if="${User.getEmailList().isEmpty()}" >
-            email <input name ="email[]" >  <br><br>
+            email <input name ="email" >  <br><br>
         </div>
+
         <div th:each="emailList : ${User.getEmailList()}">
-            email <input name ="email[]" th:value="${emailList.getEmail()}">  <br><br>
+            email <input name ="email" th:value="${emailList.getEmail()}">  <br><br>
         </div>
-        <div th:if="${User.getTelephonnumberList().isEmpty()}" >
-            telephonnumber <input name ="telephonnumber[]" type="">  <br><br>
+
+        <div class="newEmails">
         </div>
-        <div th:each="telephonnumberList : ${User.getTelephonnumberList()}">
-            telephonnumber <input name ="telephonnumber[]" th:value="${telephonnumberList.getTelephonnumber()}">  <br><br>
+
+        <div id="addEmail">
+            <button name="add" >add</button>
         </div>
+
+
+        <div id="addFormIfNull" th:if="${User.getTelephonnumberList().isEmpty()}" >
+            telephonnumber <input name ="telephonnumber" >  <br><br>
+        </div>
+        <div id="telephinNumberListForms" th:each="telephonnumberList : ${User.getTelephonnumberList()}">
+            telephonnumber <input name ="telephonnumber" th:value="${telephonnumberList.getTelephonnumber()}">  <br><br>
+        </div>
+
+        <div class="newTelephonNumber">
+        </div>
+
+        <div id="addTelephonNumber">
+            <button name="addTelephon">add</button>
+        </div>
+
         <input type="submit" name="nameButton" value="edit"><br>
     </form><br>
+
     <form>
-        <button formmethod="get" formaction="/" name="back">back</button>
+        <button formmethod="get" formaction="/index" name="back">back</button>
     </form>
 </div>
+
+
+<script >
+
+
+    $('#addEmail').on( "click", function(event) {
+        event.preventDefault();
+        $('.newEmails').append('email <input name ="email" >  <br><br>');
+    });
+
+    $('#addTelephonNumber').on( "click", function(event) {
+        event.preventDefault();
+        $('.newTelephonNumber').append('telephonnumber <input name ="telephonnumber" >  <br><br>');
+    });
+
+    $('#editUserForm').submit(function() {
+        var emails = $("input[name='email']");
+        var telephonNumbers = $("input[name='telephonnumber']");
+        for( var i = 0;  i < emails.length; i++){
+            if ($.trim($(emails[i]).val()) === "" ){
+                alert('you did not fill out one of the fields');
+                return false;
+            }
+        }
+        for( var j=0; j< telephonNumbers.length;j++){
+            if ($.trim($(telephonNumbers[j]).val()) === "" ){
+                alert('you did not fill out one of the fields');
+                return false;
+            }
+        }
+        return true;
+    });
+
+
+
+</script>
 
 </body>
 </html>

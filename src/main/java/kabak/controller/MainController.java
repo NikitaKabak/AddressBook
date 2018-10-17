@@ -19,7 +19,7 @@ public class MainController {
     @Autowired
     public MainController(ServiceUsersImpl serviceUsersImpl){ this.serviceUsersImpl = serviceUsersImpl ;}
 
-    @GetMapping("/")
+    @GetMapping("/index")
     public String gohome(){
         return "start";
     }
@@ -113,8 +113,8 @@ public class MainController {
                              @RequestParam("firstname") String firstname,
                              @RequestParam("lastname") String lastname,
                              @RequestParam("position") String position,
-                             @RequestParam("email[]") String[] email,
-                             @RequestParam("telephonnumber[]") String[] telephonnumber){
+                             @RequestParam("email") String[] email,
+                             @RequestParam("telephonnumber") String[] telephonnumber){
         ModelAndView modelAndView = new ModelAndView();
         try{
             serviceUsersImpl.edit(iduser,name,address,comments,firstname,lastname,position,email,telephonnumber);

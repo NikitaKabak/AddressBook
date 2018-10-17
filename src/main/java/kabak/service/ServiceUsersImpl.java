@@ -65,6 +65,7 @@ public class ServiceUsersImpl<T,PK> implements ServiceUsers<T,PK> {
     @Override
     public void delete(Users user) throws Exception {
 
+
     }
 
     public Users show(String name)throws Exception{
@@ -88,25 +89,29 @@ public class ServiceUsersImpl<T,PK> implements ServiceUsers<T,PK> {
         user.setFirstname(firstname);
         user.setLastname(lastname);
         user.setPosition(position);
+
+        if(serviceEmailImpl.findByUser(user).size() != 0){
+            serviceEmailImpl.deleteByUser(user);
+        }
+
         List<Email> emailList = new ArrayList<>();
-
-        int i = 0;
-            for(Email email1 : user.getEmailList()){
-
-                email1.setEmail(email[i]);
-                i++;
-                emailList.add(email1);
-            }
+        for(int i = 0; i < email.length; i++){
+            Email email1 = serviceEmailImpl.create(user,email[i]);
+            emailList.add(email1);
             user.setEmailList(emailList);
+        }
+
+        if(serviceTelephonnumberImpl.findByUser(user).size()!= 0){
+            serviceTelephonnumberImpl.deleteByUser(user);
+        }
 
         List<Telephonnumber> telephonnumberList = new ArrayList<>();
-        int j = 0;
-        for(Telephonnumber telephonnumber1 :  user.getTelephonnumberList()){
-
-            telephonnumber1.setTelephonnumber(telephonnumber[j]);
-            j++;
+        for(int j = 0; j < telephonnumber.length; j++){
+            Telephonnumber telephonnumber1 = serviceTelephonnumberImpl.create(user,telephonnumber[j]);
             telephonnumberList.add(telephonnumber1);
+            user.setTelephonnumberList(telephonnumberList);
         }
+
 
         Users userEntity = usersRepository.saveAndFlush(user);
 
