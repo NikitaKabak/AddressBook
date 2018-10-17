@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Address book</title>
+</head>
+<body>
+<h3>
+Произошла ошибка
+</h3>
+<div>
+    <span th:text="${error}"></span><br><br>
+</div>
+<div>
+    <form>
+        <button formmethod="get" formaction="/" name="back">back</button>
+    </form>
+</div>
+
+</body>
+</html>

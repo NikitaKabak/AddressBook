@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Address book</title>
+</head>
+<body>
+<div>
+    Create new user
+    <form>
+        <button formmethod="get" formaction="/create" name="create">create</button>
+    </form> <br><br>
+
+
+    Edit user
+    <form action="/editpage" method="post">
+        Name <input name="name" >
+        <input type="submit" name="nameButton" value="edit"> <br> <br>
+    </form>
+
+
+
+    Show All users  in short  form
+    <form>
+        <button formmethod="get" formaction="/showall" name="showall">showall</button>
+    </form> <br><br>
+
+
+    Show user
+    <form action="/show" method="post">
+        Name <input name="name" >
+        <input type="submit" name="nameButton" value="show"> <br> <br>
+    </form>
+
+
+
+
+</div>
+
+</body>
+</html>

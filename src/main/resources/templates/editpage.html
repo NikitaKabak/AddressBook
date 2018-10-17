@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Security with Spring Boot</title>
+</head>
+<body>
+<div>
+
+    <form method="post" action="/edit">
+
+        <input name="iduser" th:value="${User.getIduser()}" type="hidden">
+        Name <input name ="name" th:value="${User.getName()}">  <br><br>
+        address <input name ="address" th:value="${User.getAddress()}">  <br><br>
+        comments <input name ="comments" th:value="${User.getComments()}">  <br><br>
+        firstname <input name ="firstname" th:value="${User.getFirstname()}">  <br><br>
+        lastname <input name ="lastname" th:value="${User.getLastname()}">  <br><br>
+        position <input name ="position" th:value="${User.getPosition()}">  <br><br>
+        <div th:if="${User.getEmailList().isEmpty()}" >
+            email <input name ="email[]" >  <br><br>
+        </div>
+        <div th:each="emailList : ${User.getEmailList()}">
+            email <input name ="email[]" th:value="${emailList.getEmail()}">  <br><br>
+        </div>
+        <div th:if="${User.getTelephonnumberList().isEmpty()}" >
+            telephonnumber <input name ="telephonnumber[]" type="">  <br><br>
+        </div>
+        <div th:each="telephonnumberList : ${User.getTelephonnumberList()}">
+            telephonnumber <input name ="telephonnumber[]" th:value="${telephonnumberList.getTelephonnumber()}">  <br><br>
+        </div>
+        <input type="submit" name="nameButton" value="edit"><br>
+    </form><br>
+    <form>
+        <button formmethod="get" formaction="/" name="back">back</button>
+    </form>
+</div>
+
+</body>
+</html>

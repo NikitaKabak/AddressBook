@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>create user</title>
+</head>
+<body>
+<h1>create user</h1>
+<div>
+    <form method="post" action="/create">
+        Name <input name ="name" >  <br><br>
+        address <input name ="address" >  <br><br>
+        comments <input name ="comments" >  <br><br>
+        firstname <input name ="firstname" >  <br><br>
+        lastname <input name ="lastname" >  <br><br>
+        position <input name ="position" >  <br><br>
+        email <input name ="email" >  <br><br>
+        telephonnumber <input name ="telephonnumber" >  <br><br>
+        <input type="submit" name="nameButton" value="create"><br>
+    </form> <br>
+    <form>
+        <button formmethod="get" formaction="/" name="back">back</button>
+    </form>
+</div>
+
+</body>
+</html>

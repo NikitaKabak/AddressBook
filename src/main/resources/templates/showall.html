@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Security with Spring Boot</title>
+</head>
+<body>
+<table>
+    <tr>
+        <td>Name</td>
+        <td>FirstName LastName </td>
+        <td>Address</td>
+        <td>Email</td>
+        <td>Telephonnumber</td>
+    </tr>
+    <div th:each="usersList : ${UsersList}">
+        <tr>
+            <td>
+                <span th:text="${usersList.getName()}"></span>
+            </td>
+            <td>
+                <span th:text="${usersList.getFirstname()}"></span>
+                <span th:text="${usersList.getLastname()}"></span>
+            </td>
+            <td>
+                <span th:text="${usersList.getAddress()}"></span>
+            </td>
+            <td>
+                <div th:each="emailList : ${usersList.getEmailList()}">
+                    <span th:text="${emailList.getEmail()}"></span><br>
+                </div>
+            </td>
+            <td>
+                <div th:each="telephonnumberList : ${usersList.getTelephonnumberList()}">
+                    <span th:text="${telephonnumberList.getTelephonnumber()}"></span><br><br>
+                </div>
+            </td>
+        </tr>
+    </div>
+</table>
+<div>
+    <form>
+        <button formmethod="get" formaction="/" name="back">back</button>
+    </form>
+</div>
+</body>
+</html>
